@@ -1,0 +1,54 @@
+<sb-card>
+    <div class="card-body">
+        <div *ngIf="listquans$ | async; then display; else loading"></div>
+        <ng-template #display>
+            <div class="row">
+                <div class="col-md-4 pd-checkbox" *ngFor="let quan of listquans$ | async" routerLink="/dashboard/san/{{quan.id}}">
+                    <label class="customer-checkbox"   >
+                        <div class="row">
+                            <div >
+                                <sb-card>
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <br>
+                                        <div *ngIf="quan.image" >
+                                            <img style="width: 150px; " src="{{url+'/'+quan.image}}">
+                                        </div>
+                                        <div *ngIf="!quan.image" >
+                                            <img class="profile_img" src="../../../assets/img/avatar.jpg">
+                                        </div>
+                                        <br>
+                                        <table class="table table-striped ">
+                                            <tbody>
+                                                <tr>
+                                                    <td>full_name</td>
+                                                    <td> <strong>{{ quan.name }}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Phone</td>
+                                                    <td><strong>{{ quan.phone}}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>address</td>
+                                                    <td><strong>{{ quan.address }}</strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                </sb-card>
+                                &emsp;
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #loading>
+            <div class="spinner">
+                <div class="ball-1"></div>
+                <div class="ball-2"></div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>

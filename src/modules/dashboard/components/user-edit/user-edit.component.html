@@ -1,0 +1,46 @@
+<div class="container py-2">
+    <div class="row my-2">
+        <!-- edit form column -->
+        <div class="col-lg-8 order-lg-1 personal-info">
+            <form role="form">
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Full name</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #name name="UserFormGroup.value.name" [(ngModel)]="UserFormGroup.value.name" type="text" placeholder="Name" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Phone</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" name="UserFormGroup.value.phone" [(ngModel)]="UserFormGroup.value.phone" type="text" placeholder="phone" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #gmail type="email" name="UserFormGroup.value.gmail" [(ngModel)]="UserFormGroup.value.gmail" value="gmail@gmail.com" />
+                    </div>
+                </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Address</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" #address name="UserFormGroup.value.address" [(ngModel)]="UserFormGroup.value.address" />
+                            </div>
+                        </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="password" #password name="UserFormGroup.value.phone" [(ngModel)]="UserFormGroup.value.phone" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-9 ml-auto text-right">
+                        <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Cancel" />
+                        <input type="button" class="btn btn-primary" (click)="Save(name.value,gmail.value,address.value,password.value)" value="Save Changes" />
+                    </div>
+                </div>
+            </form>
+        </div>
+      
+    </div>
+</div>
