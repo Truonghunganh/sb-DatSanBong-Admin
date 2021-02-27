@@ -1,11 +1,15 @@
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardListsanComponent } from './dashboard-listsan/dashboard-listsan.component';
-import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
-import { DashboardUserEditComponent } from './dashboard-user-edit/dashboard-user-edit.component';
+import { DashboardListQuansByAdminComponent } from './dashboard-list-quans-by-admin/dashboard-list-quans-by-admin.component';
+import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
+import { DashboardEditAdminComponent } from './dashboard-edit-admin/dashboard-edit-admin.component';
+import { DashboardListSansByIdQuanComponent } from './dashboard-list-sans-by-id-quan/dashboard-list-sans-by-id-quan.component';
+import { DashboardDanhThuOfQuanComponent } from './dashboard-danh-thu-of-quan/dashboard-danh-thu-of-quan.component';
+import { DashboardDanhThuListQuanByAdminComponent } from './dashboard-danh-thu-list-quan-by-admin/dashboard-danh-thu-list-quan-by-admin.component';
 
-export const containers = [DashboardComponent, DashboardListsanComponent, DashboardUserComponent, DashboardUserEditComponent];
+export const containers = [DashboardListQuansByAdminComponent, DashboardAdminComponent, DashboardEditAdminComponent, DashboardListSansByIdQuanComponent, DashboardDanhThuOfQuanComponent, DashboardDanhThuListQuanByAdminComponent];
 
-export * from './dashboard/dashboard.component';
-export * from './dashboard-listsan/dashboard-listsan.component';
-export * from './dashboard-user/dashboard-user.component';
-export * from './dashboard-user-edit/dashboard-user-edit.component';
+export * from './dashboard-list-quans-by-admin/dashboard-list-quans-by-admin.component';
+export * from './dashboard-admin/dashboard-admin.component';
+export * from './dashboard-edit-admin/dashboard-edit-admin.component';
+export * from './dashboard-list-sans-by-id-quan/dashboard-list-sans-by-id-quan.component';
+export * from './dashboard-danh-thu-of-quan/dashboard-danh-thu-of-quan.component';
+export * from './dashboard-danh-thu-list-quan-by-admin/dashboard-danh-thu-list-quan-by-admin.component';

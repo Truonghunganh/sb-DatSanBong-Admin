@@ -1,0 +1,58 @@
+<sb-card>
+    <div class="card-body">
+        <div *ngIf="checklistquansdapheduyet ; then display ; else loading"></div>
+        <ng-template #display>
+            <div class="row">
+
+                <table class="table table-striped " style="width:100%">
+                    <thead>
+                        <tr>
+                            <td>id</td>
+                            <td>Name</td>
+                            <td>Address</td>
+                            <td>Phone</td>
+                            <td>Ngày giờ đăng kí</td>
+                            <td>Image</td>
+                            <td>cho vào chưa phê duyệt</td>
+                            <td>Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let quan of listquansdapheduyet " routerLink="/dashboard/quans/{{quan.id}}" >
+                            <td>{{quan.id}}</td>
+                            <td>{{quan.name}}</td>
+                            <td><a href="{{quan.linkaddress}}">{{quan.address}}</a></td>
+                            <td>{{quan.phone}}</td>
+                            <td>{{quan.Create_time}}</td>
+                            <td>
+                                <div *ngIf="quan.image">
+                                    <img style="width: 5opx; height: 50px;" src="{{url+'/'+quan.image}}">
+                                </div>
+                                <div *ngIf="!quan.image">
+                                    <img style="width: 50px; height: 50px;" class="profile_img"
+                                        src="../../../assets/img/avatar.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)="thaydoitrangthai(quan)">chọn</button>
+                            </td>
+                            <td>
+                                <fa-icon (click)="deleteQuan(quan)" [icon]='["fas","trash"]' class='fas fa-trash fa-2x'>
+                                </fa-icon>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </ng-template>
+
+        <ng-template #loading>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>

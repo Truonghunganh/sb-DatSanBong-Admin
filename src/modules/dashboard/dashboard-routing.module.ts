@@ -19,32 +19,40 @@ export const ROUTES: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/dashboard/quan',
-        //redirectTo: 'quan/:iduser',
+        redirectTo: '/dashboard/quans',
     },
 
     {
-        path: 'quan',
+        path: 'quans',
         canActivate: [],
-        component: dashboardContainers.DashboardComponent,
+        component: dashboardContainers.DashboardListQuansByAdminComponent,
     },
     {
-        path: 'san/:idquan',
+        path: 'admin',
         canActivate: [],
-        component: dashboardContainers.DashboardListsanComponent,
+        component: dashboardContainers.DashboardAdminComponent,
     },
     {
-        path: 'user',
+        path: 'editadmin',
         canActivate: [],
-        component: dashboardContainers.DashboardUserComponent,
+        component: dashboardContainers.DashboardEditAdminComponent,
     },
     {
-        path: 'edituser',
+        path: 'quans/:idquan',
         canActivate: [],
-        component: dashboardContainers.DashboardUserEditComponent,
+        component: dashboardContainers.DashboardListSansByIdQuanComponent,
+    },
+    {
+        path: 'danhthu/:idquan',
+        canActivate: [],
+        component: dashboardContainers.DashboardDanhThuOfQuanComponent,
+    },
+    {
+        path: 'danhthulistquan',
+        canActivate: [],
+        component: dashboardContainers.DashboardDanhThuListQuanByAdminComponent,
     },
 
-  
 ];
 
 @NgModule({

@@ -7,7 +7,7 @@ export const sideNavSections: SideNavSection[] = [
     },
     {
         text: 'MANAGER',
-        items: ['Customers'],
+        items: ['Admin',"DanhThuListQuan"],
     },
     
 ];
@@ -16,12 +16,16 @@ export const sideNavItems: SideNavItems = {
     Dashboard: {
         icon: 'arrows-alt',
         text: 'Dashboard',
-        link: '/dashboard/quan',
+        link: '/dashboard/quans',
     },
-    Customers: {
+    Admin: {
         icon: 'user',
-        text: 'Customers',
-        link: '/dashboard/user',
+        text: 'Admin',
+        link: '/dashboard/admin',
+    },
+    DanhThuListQuan: {
+        text: 'DanhThuListQuan',
+        link: '/dashboard/danhthulistquan',
     },
 
 };

@@ -1,0 +1,48 @@
+<h3>Chọn tháng danh thu :
+    <input type="month" [(ngModel)]="month" name="month" (change)="chonthang($event);">
+    <input type="button" class="btn btn-danger float-right" (click)="break()" value="Break" />
+</h3>
+<sb-card>
+
+    <div class="card-body">
+        <div *ngIf="checkdanhthu then display; else loading"></div>
+        <ng-template #display>
+            <table style="width: 100%;" border="1">
+                <tr>
+                    <td style="text-align: center;width: 20%;">id quán</td>
+                    <td style="text-align: center;width: 20%;">name quán</td>
+              
+                    <td style="text-align: center;width: 20%;">address quán</td>
+                    <td style="text-align: center;width: 20%;">phone quán</td>
+                    <td style="text-align: center;width: 20%;">Danh thu</td>
+
+                </tr>
+                <tr *ngFor="let danhthu of danhthus ;">
+                    <td>
+                        {{danhthu.idquan}}
+                    </td>
+                    <td>
+                        {{danhthu.namequan}}
+                    </td>
+                    <td>
+                        {{danhthu.addressquan}}
+                    </td>
+                    <td>
+                        {{danhthu.phonequan}}
+                    </td>
+                    <td>
+                        {{danhthu.danhthu}}
+                    </td>
+                </tr>
+            </table>
+
+        </ng-template>
+        <ng-template #loading>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>

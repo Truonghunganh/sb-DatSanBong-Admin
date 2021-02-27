@@ -26,12 +26,13 @@ export class AuthService {
     };
   //  private adminSubject: any;
     logout() {
-        this.storage.set('tokenUser', JSON.stringify(1));
+        this.storage.set('tokenAdmin', JSON.stringify(1));
         this.router.navigate(['auth/login']);
 
     }
-    checkTokenUser(): Observable<any>{
-        return this.http.get<any>('http://localhost:8000/api/v1/checkTokenUser', this.appCommonService.httpOptions).pipe(
+    checkTokenAdmin(): Observable<any>{
+        
+        return this.http.get<any>('http://localhost:8000/api/v1/checkTokenAdmin', this.appCommonService.httpOptions).pipe(
             tap(data => {
                 of(data);
             }),
@@ -41,11 +42,11 @@ export class AuthService {
     login(user : any): Observable<any>{
         console.log(this.appCommonService.httpOptions);
         
-        return this.http.post<any>('http://localhost:8000/api/v1/loginUser', user, this.appCommonService.httpOptions).pipe(
+        return this.http.post<any>('http://localhost:8000/api/v1/loginAdmin', user, this.appCommonService.httpOptions).pipe(
             tap(data=>{
                 console.log(data);
                 if(data.status){                    
-                    this.storage.set('tokenUser', JSON.stringify(data.token));                    
+                    this.storage.set('tokenAdmin', JSON.stringify(data.token));                    
                 }
                 return of(data);
             }),
@@ -53,6 +54,6 @@ export class AuthService {
         )
     }    
     setToken(token:string){
-        this.storage.set('tokenUser', JSON.stringify(token));
+        this.storage.set('tokenAdmin', JSON.stringify(token));
     }
 }

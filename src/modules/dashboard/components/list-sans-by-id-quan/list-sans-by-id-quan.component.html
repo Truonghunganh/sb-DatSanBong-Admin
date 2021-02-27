@@ -1,0 +1,183 @@
+<h1 style="color:chartreuse">1 .Thông tin của Quán
+    <input type="button" class="btn btn-success float-right" (click)="xemdanhthu()" value="xem danh thu của quán" />
+</h1>
+<sb-card>
+    <div class="card-body">
+        <div *ngIf="checkquan then display2; else loading2"></div>
+        <ng-template #display2>
+            <div class="text-center">
+                <table style="width: 100%;" border="1">
+                    <tr>
+                        <td style="text-align: center;" rowspan="3">
+                            <div *ngIf="quan.image">
+                                <img style="width: 150px; " src="{{url+'/'+quan.image}}">
+                            </div>
+                            <div *ngIf="!quan.image">
+                                <img class="profile_img" src="../../../assets/img/avatar.jpg">
+                            </div>
+                        </td>
+                        <td style="text-align: center;">full_name</td>
+                        <td style="text-align: center;"> <strong>{{ quan.name }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">Phone</td>
+                        <td style="text-align: center;"><strong>{{ quan.phone}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">address</td>
+                        <td style="text-align: center;">
+                            <a href="{{quan.linkaddress}}">
+                                <strong>{{ quan.address}}</strong>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </ng-template>
+        <ng-template #loading2>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>
+
+<h1 style="color:blue">2 .Lịch đặt sân của quán</h1>
+<div class="form-group">
+    <div>
+        Hãy chọn ngày đặt sân :
+        <input type="date" [(ngModel)]="today" (change)="chonngay($event);">
+    </div>
+</div>
+<sb-card>
+
+    <div class="card-body">
+        <div *ngIf="checkdatsan then display; else loading"></div>
+        <ng-template #display>
+            <table style="width: 100%;" border="1">
+                <tr>
+                    <td style="text-align: center;width: 6%;">tên sân</td>
+                    <td style="text-align: center;width: 6%;">5h</td>
+                    <td style="text-align: center;width: 6%;">6h</td>
+                    <td style="text-align: center;width: 6%;">7h</td>
+                    <td style="text-align: center;width: 6%;">8h</td>
+                    <td style="text-align: center;width: 6%;">9h</td>
+                    <td style="text-align: center;width: 6%;">10h</td>
+                    <td style="text-align: center;width: 6%;">11h</td>
+                    <td style="text-align: center;width: 6%;">12h</td>
+                    <td style="text-align: center;width: 6%;">13h</td>
+                    <td style="text-align: center;width: 6%;">14h</td>
+                    <td style="text-align: center;width: 6%;">15h</td>
+                    <td style="text-align: center;width: 6%;">16h</td>
+                    <td style="text-align: center;width: 6%;">17h</td>
+                    <td style="text-align: center;width: 6%;">18h</td>
+                    <td style="text-align: center;width: 6%;">19h</td>
+                    <td style="text-align: center;width: 6%;">20h</td>
+                </tr>
+                <tr *ngFor="let san of listsans ;index as i;" >
+                    <td>
+                        {{san.name}}
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][0]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][1]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][2]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][3]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][4]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][5]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][6]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][7]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][8]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][9]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][10]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][11]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][12]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][13]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][14]" class="btdt">chưa đặt</button>
+                    </td>
+                    <td style="background-color: #41c04d;">
+                        <button *ngIf="!mangDatsan[i][15]" class="btdt">chưa đặt</button>
+                    </td>
+
+                </tr>
+            </table>
+
+        </ng-template>
+        <ng-template #loading>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>
+
+<h1 style="color:red">3 .Danh sách các sân bóng</h1>
+<sb-card>
+    <div class="card-body">
+        <div *ngIf="checklistsans then display1; else loading1"></div>
+        <ng-template #display1>
+            <div class="row">
+                <table class="table table-striped " style="width:100%">
+                    <thead>
+                        <tr>
+                            <td>id</td>
+                            <td>tên sân</td>
+                            <td>số người trong 1 phe</td>
+                            <td>số tiền trong 1 giờ</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let san of listsans">
+                            <td>{{san.id}}</td>
+                            <td>{{san.name}}</td>
+                            <td>{{ san.numberpeople}}</td>
+                            <td>{{ san.priceperhour }}</td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+
+                
+            </div>
+        </ng-template>
+        <ng-template #loading1>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>

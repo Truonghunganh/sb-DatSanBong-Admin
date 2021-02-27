@@ -28,12 +28,12 @@ export class LoginComponent implements OnInit {
             phone: ['', Validators.required],
             password: ['', Validators.required],
         });
-        this.authService.checkTokenUser().subscribe(
+        this.authService.checkTokenAdmin().subscribe(
             result => {
                 console.log(result);
                 
                 if (result.status) {
-                    this.router.navigate(['/dashboard/quan']);
+                    //this.router.navigate(['/dashboard/quan']);
                 }
                 
             }
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         const user=new User(phone,password);
         this.authService.login(user).subscribe(result => {
             if (result.status) {
-                this.router.navigate(['/dashboard/quan']);
+                this.router.navigate(['/dashboard/quans']);
             } else {
                 Swal.fire({
                     icon: 'error',

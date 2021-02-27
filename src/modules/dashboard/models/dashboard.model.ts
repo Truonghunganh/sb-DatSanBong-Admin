@@ -10,16 +10,17 @@ export class Datsan{
         this.price=price;
     }
 };
-export class User{
-    name:string;
-    gmail:string;
-    address:string;
-    password:string;
-    constructor(name:string,gmail:string,address:string,password: string){
-        this.name=name;
-        this.gmail=gmail;
-        this.address=address;
-        this.password=password;
-        
+export class Admin {
+    name: string;
+    gmail: string;
+    address: string;
+    password: string;
+    constructor(name: string, gmail: string, address: string, password: string) {
+        this.name = name;
+        this.gmail = gmail;
+        this.address = address;
+        this.password = password;
+
     }
 }
+
