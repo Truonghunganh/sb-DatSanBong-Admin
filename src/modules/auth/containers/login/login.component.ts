@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User} from './../../models/auth.model';
@@ -15,27 +15,30 @@ import { AuthService } from './../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
     loginFormGroup: any;
-    error = '';
-    a = true;
+    checklogin = false;
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService,
-        private router: Router
-    ) {}
-    ngOnInit() {
+        private router: Router,
+        private changeDetectorRef: ChangeDetectorRef
+
+    ) { }
+        ngOnInit() {
         
         this.loginFormGroup = this.formBuilder.group({
             phone: ['', Validators.required],
             password: ['', Validators.required],
         });
+        this.checklogin=false;
         this.authService.checkTokenAdmin().subscribe(
             result => {
-                console.log(result);
-                
                 if (result.status) {
-                    //this.router.navigate(['/dashboard/quan']);
+                    this.router.navigate(['/dashboard/quans']);
+                } else {
+                    this.checklogin = true;
+                    this.changeDetectorRef.detectChanges();
                 }
-                
+
             }
         )
     }

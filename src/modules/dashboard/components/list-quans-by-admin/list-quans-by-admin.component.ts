@@ -31,6 +31,8 @@ export class ListQuansByAdminComponent implements OnInit {
     checklistquansdapheduyet=false;
     checktoken() {
         this.authService.checkTokenAdmin().subscribe(data => {
+            console.log(data);
+            
             if (!data.status) {
                 this.router.navigate(['/auth/login']);
             } else {
