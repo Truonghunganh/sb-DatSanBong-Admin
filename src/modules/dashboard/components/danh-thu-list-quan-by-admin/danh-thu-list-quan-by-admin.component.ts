@@ -12,8 +12,12 @@ import Swal from 'sweetalert2';
 })
 export class DanhThuListQuanByAdminComponent implements OnInit {
     month = new Date().toISOString().slice(0, 7);
-    checkdanhthu = false;
-    danhthus: any;
+    checkdoanhthu = false;
+    doanhthus: any;
+    tongdoanhthuquan=0;
+    tongdoanhthuadmin=0;
+    laixuat=""; 
+
     constructor(
         private dashboardService: DashboardService,
         private router: Router,
@@ -30,18 +34,34 @@ export class DanhThuListQuanByAdminComponent implements OnInit {
                 this.router.navigate(['/dashboard/quans'])
 
             } else {
-                this.getDanhThuListQuanByAdmin();
+                this.getDoanhThuListQuanByAdmin();
             }
         })
     }
-    getDanhThuListQuanByAdmin() {
-        this.checkdanhthu = false;
-        this.dashboardService.getDanhThuListQuanByAdmin(this.month).subscribe(data => {
+    tinhtong(mang: any){
+        let tong=0;
+        for (let i = 0; i < mang.length; i++) {
+            tong+=mang[i];
+        }
+        return tong;
+    }
+    getDoanhThuListQuanByAdmin() {
+        this.checkdoanhthu = false;
+        this.dashboardService.getDoanhThuListQuanByAdmin(this.month).subscribe(data => {
             console.log(data);
 
             if (data.status) {
-                this.danhthus = data.danhthus;
-                this.checkdanhthu = true;
+                this.doanhthus = data.doanhthus;
+                this.tongdoanhthuquan=0;
+                this.tongdoanhthuadmin=0;
+                for (let i = 0; i < this.doanhthus.length; i++) {
+                    this.tongdoanhthuquan+=this.doanhthus[i].doanhthuquan;
+                    this.tongdoanhthuadmin+=this.doanhthus[i].doanhthuadmin;
+                }
+                this.laixuat=data.laixuat;
+                console.log(this.tongdoanhthuquan,this.tongdoanhthuadmin);
+                
+                this.checkdoanhthu = true;
                 this.changeDetectorRef.detectChanges();
 
             } else {
@@ -55,7 +75,7 @@ export class DanhThuListQuanByAdminComponent implements OnInit {
     }
     chonthang(thang: any) {
         this.month = thang.target.value
-        this.getDanhThuListQuanByAdmin();
+        this.getDoanhThuListQuanByAdmin();
 
     }
     break() {

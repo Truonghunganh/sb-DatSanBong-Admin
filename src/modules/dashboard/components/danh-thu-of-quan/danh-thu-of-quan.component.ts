@@ -13,8 +13,8 @@ import Swal from 'sweetalert2';
 export class DanhThuOfQuanComponent implements OnInit {
     month = new Date().toISOString().slice(0, 7);
     idquan = 0;
-    checkdanhthu = false;
-    danhthus: any;
+    checkdoanhthu = false;
+    doanhthus: any;
     constructor(
         private dashboardService: DashboardService,
         private router: Router,
@@ -33,18 +33,23 @@ export class DanhThuOfQuanComponent implements OnInit {
                 this.router.navigate(['/dashboard/quans'])
 
             } else {
-                this.getDanhThuByAdmin();
+                this.getDoanhThuByAdmin();
             }
         })
     }
-    getDanhThuByAdmin() {
-        this.checkdanhthu = false;
-        this.dashboardService.getDanhThuByAdmin(this.idquan, this.month).subscribe(data => {
+    tongdoanhthu=0;
+    getDoanhThuByAdmin() {
+        this.checkdoanhthu = false;
+        this.dashboardService.getDoanhThuByAdmin(this.idquan, this.month).subscribe(data => {
             console.log(data);
 
             if (data.status) {
-                this.danhthus = data.danhthus;
-                this.checkdanhthu = true;
+                this.doanhthus = data.doanhthus;
+                this.tongdoanhthu=0;
+                for (let i = 0; i < this.doanhthus.length; i++) {
+                    this.tongdoanhthu+=this.doanhthus[i].doanhthu;
+                }
+                this.checkdoanhthu = true;
                 this.changeDetectorRef.detectChanges();
 
             } else {
@@ -58,7 +63,7 @@ export class DanhThuOfQuanComponent implements OnInit {
     }
     chonthang(thang: any) {
         this.month = thang.target.value
-        this.getDanhThuByAdmin();
+        this.getDoanhThuByAdmin();
 
     }
     break() {

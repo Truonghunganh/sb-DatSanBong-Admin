@@ -23,13 +23,13 @@ export class DashboardService {
             tap(data => of(data)),catchError(this.appCommonService.errorHandler)
         );
     }
-    getListQuansDaPheDuyetByTokenAdmin(): Observable<any> {
-        return this.http.get<any>(environment.url + "/api/v1/getListQuansDaPheDuyetByTokenAdmin", this.appCommonService.httpOptions).pipe(
+    getListQuansDaPheDuyetByTokenAdmin(page:number): Observable<any> {
+        return this.http.get<any>(environment.url + "/api/v1/getListQuansDaPheDuyetByTokenAdmin?page="+page, this.appCommonService.httpOptions).pipe(
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         );
     }
-    getListQuansChuaPheDuyetByTokenAdmin(): Observable<any> {
-        return this.http.get<any>(environment.url + "/api/v1/getListQuansChuaPheDuyetByTokenAdmin", this.appCommonService.httpOptions).pipe(
+    getListQuansChuaPheDuyetByTokenAdmin(page: number): Observable<any> {
+        return this.http.get<any>(environment.url + "/api/v1/getListQuansChuaPheDuyetByTokenAdmin?page="+page, this.appCommonService.httpOptions).pipe(
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         );
     }
@@ -54,14 +54,9 @@ export class DashboardService {
             } ), catchError(this.appCommonService.errorHandler)
         );
     }
-    getsanByidquan(idquan: number, ngay: any): Observable<any> {
-        return this.http.get<any>(environment.url + "/api/v1/san?idquan=" + idquan + "&start_time=" + ngay)
-            .pipe(
-                tap(data => {
-                    of(data);
-                },
-                    catchError(this.appCommonService.errorHandler)
-                ));
+    getDatSansvaSansByAdminAndIdquanAndNgay(idquan: number, ngay: any): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getDatSansvaSansByAdminAndIdquanAndNgay",{"idquan": idquan , "start_time":  ngay},this.appCommonService.httpOptions)
+            .pipe(tap(data => {of(data);},catchError(this.appCommonService.errorHandler)));
     }
 
 
@@ -70,14 +65,23 @@ export class DashboardService {
             .pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
     }
 
-    getDanhThuByAdmin(idquan: number, month: any): Observable<any> {
-        return this.http.post<any>(environment.url + "/api/v1/getDanhThuByAdmin", { "idquan": idquan, "time": month }, this.appCommonService.httpOptions)
+    getDoanhThuByAdmin(idquan: number, month: any): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getDoanhThuByAdmin", { "idquan": idquan, "time": month }, this.appCommonService.httpOptions)
             .pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
     }
 
-    getDanhThuListQuanByAdmin(month: any): Observable<any> {
-        return this.http.post<any>(environment.url + "/api/v1/getDanhThuListQuanByAdmin", { "time": month }, this.appCommonService.httpOptions)
+    getDoanhThuListQuanByAdmin(month: any): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getDoanhThuListQuanByAdmin", { "time": month }, this.appCommonService.httpOptions)
             .pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
+    }
+    getDoanhThuCuaAdminTheoNam(nam: number): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getDoanhThuCuaAdminTheoNam", { "nam":nam }, this.appCommonService.httpOptions)
+            .pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
+    }
+    getAllQuansByTokenAdmin(): Observable<any> {
+        return this.http.get<any>(environment.url + "/api/v1/getAllQuansByTokenAdmin", this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        );
     }
 
 }

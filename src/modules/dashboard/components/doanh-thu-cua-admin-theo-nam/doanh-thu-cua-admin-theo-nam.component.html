@@ -1,0 +1,30 @@
+<h1>Doanh thu của năm :
+     <input type='number' min="2020" [(ngModel)]="nam" name="nam" max="2100" (change)="chonNam();">
+</h1>
+<sb-card>
+    <div class="card-header">
+        <h4>Dạng biểu đồ :{{dangBD}}
+            <input type="button" class="btn btn-info float-right" (click)="cot()" value="Biểu đồ Cột" />
+            <input type="button" class="btn btn-success float-right" (click)="tron()" value="Biểu đồ tròn" />
+            <input type="button" class="btn btn-primary float-right" (click)="duong()" value="Biểu đồ đường" />
+        </h4>
+    </div>
+    <div class="card-body">
+        <div *ngIf="checkdoanhthustheonam then display1; else loading1"></div>
+        <ng-template #display1>
+            <div class="chart-wrapper">
+                <canvas baseChart [datasets]="lineChartDataOB" [labels]="lineChartLabelsOB" [colors]="lineChartColors"
+                    [chartType]="lineChartTypeOB"></canvas>
+            </div>
+            <strong>Tổng Doanh thu của năm {{nam}}: </strong>{{tongDanhthucuuanam }}
+        </ng-template>
+        <ng-template #loading1>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+
+    </div>
+</sb-card>

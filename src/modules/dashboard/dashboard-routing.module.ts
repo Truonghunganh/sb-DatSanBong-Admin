@@ -43,14 +43,24 @@ export const ROUTES: Routes = [
         component: dashboardContainers.DashboardListSansByIdQuanComponent,
     },
     {
-        path: 'danhthu/:idquan',
+        path: 'doanhthu/:idquan',
         canActivate: [],
         component: dashboardContainers.DashboardDanhThuOfQuanComponent,
     },
     {
-        path: 'danhthulistquan',
+        path: 'doanhthulistquan',
         canActivate: [],
         component: dashboardContainers.DashboardDanhThuListQuanByAdminComponent,
+    },
+    {
+        path: 'seachquan',
+        canActivate: [],
+        component: dashboardContainers.DashboardGoogleMapsSearchQuanComponent,
+    },
+    {
+        path: 'doanhthucuaadmintheonam',
+        canActivate: [],
+        component: dashboardContainers.DashboardDoanhThuCuaAdminTheoNamComponent,
     },
 
 ];

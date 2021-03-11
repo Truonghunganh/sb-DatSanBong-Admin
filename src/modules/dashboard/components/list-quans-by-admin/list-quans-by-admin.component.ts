@@ -31,25 +31,51 @@ export class ListQuansByAdminComponent implements OnInit {
     checklistquansdapheduyet=false;
     checktoken() {
         this.authService.checkTokenAdmin().subscribe(data => {
-            console.log(data);
-            
             if (!data.status) {
                 this.router.navigate(['/auth/login']);
             } else {
-                this.getListquans();
+                this.getListquans(this.page);
             }
         })
     }
-    getListquans() {
+    page=1;
+    tongpage=0;
+    mangtrang: any;
+    taomangtrang(page:number){
+        var mang:Array<boolean>= [];
+        for (let i = 0; i < this.tongpage; i++) {
+            mang.push(false);
+            
+        }
+        mang[page-1] = true;
+        this.mangtrang= mang;
+        
+    }
+    Previous(){
+        if(this.page>1){
+            this.page--;
+            this.getListquans(this.page);
+        }
+    }
+    Next(){
+        if (this.page<this.tongpage) {
+            this.page++;
+            this.getListquans(this.page);
+        }
+    }
+    chontrang(page:number){
+        this.page= page;
+        this.getListquans(this.page);
+    }
+    getListquans(page:number) {
         this.checklistquansdapheduyet = false;
-        this.dashboardService.getListQuansDaPheDuyetByTokenAdmin().subscribe(data => {
-            console.log(data);
-
+        this.dashboardService.getListQuansDaPheDuyetByTokenAdmin(page).subscribe(data => {
             if (data.status) {
                 this.listquansdapheduyet = data.quans;
+                this.tongpage=data.tongpage;
+                this.taomangtrang(this.page);
                 this.checklistquansdapheduyet = true;
                 this.changeDetectorRef.detectChanges();
-
             }
             else {
                 Swal.fire({
@@ -68,10 +94,8 @@ export class ListQuansByAdminComponent implements OnInit {
         }).then(result => {
             if (result.value) {
                 this.dashboardService.UpdateTrangThaiQuanTokenAdmin(quan.id,false).subscribe(data=>{
-                    console.log(data);
                     if(data.status){
-                        this.getListquans();
-
+                        this.getListquans(this.page);
                     }else{
                         Swal.fire({
                             icon: 'error',
@@ -81,11 +105,8 @@ export class ListQuansByAdminComponent implements OnInit {
                 })           
             } 
         });
-        
     }
     deleteQuan(quan: any) {
-        const a = true
-        console.log(quan);
         Swal.fire({
             html: '<h1 style="color: #41c04d;">Bạn có muốn xóa Quán này không ?</h1><table style="width: 100%;" border="1"><tr ><td style="text-align: center;" colspan="2"><div><img style="width: 100px; " src="' + this.url + '/' + quan.image + '"></div></td></tr><tr><td>tên quán </td><td>' + quan.name + '</td></tr><tr><td>Phone </td><td>' + quan.phone + '</td></tr><tr><td>Address </td><td>' + quan.address + '</td></tr></table>',
             showCancelButton: true,
@@ -101,24 +122,16 @@ export class ListQuansByAdminComponent implements OnInit {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                            this.getListquans();
+                            this.getListquans(this.page);
                         } else {
                             Swal.fire({
                                 icon: 'error',
                                 title: data.message,
                             })
-
                         }
-
                     }
                 )
-
-            } else {
-
             }
         });
-
-
     }
-    
 }

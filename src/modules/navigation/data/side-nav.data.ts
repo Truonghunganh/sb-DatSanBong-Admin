@@ -7,7 +7,7 @@ export const sideNavSections: SideNavSection[] = [
     },
     {
         text: 'MANAGER',
-        items: ['Admin',"DanhThuListQuan"],
+        items: ['Admin',"DoanhThuListQuan","DoanhThuCuaAdminTheoNam"],
     },
     
 ];
@@ -15,7 +15,7 @@ export const sideNavSections: SideNavSection[] = [
 export const sideNavItems: SideNavItems = {
     Dashboard: {
         icon: 'arrows-alt',
-        text: 'Dashboard',
+        text: 'Danh sách các quán',
         link: '/dashboard/quans',
     },
     Admin: {
@@ -23,9 +23,13 @@ export const sideNavItems: SideNavItems = {
         text: 'Admin',
         link: '/dashboard/admin',
     },
-    DanhThuListQuan: {
-        text: 'DanhThuListQuan',
-        link: '/dashboard/danhthulistquan',
+    DoanhThuListQuan: {
+        text: 'Doanh Thu các quán',
+        link: '/dashboard/doanhthulistquan',
     },
-
+    DoanhThuCuaAdminTheoNam:{
+        text: 'Doanh Thu Cua Admin Theo Nam',
+        link:'/dashboard/doanhthucuaadmintheonam'
+    }
+//doanhthucuaadmintheonam
 };

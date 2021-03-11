@@ -1,41 +1,49 @@
-<h3>Chọn tháng danh thu :
+<h3>Chọn tháng doanh thu :
     <input type="month" [(ngModel)]="month" name="month" (change)="chonthang($event);">
     <input type="button" class="btn btn-danger float-right" (click)="break()" value="Break" />
 </h3>
 <sb-card>
 
     <div class="card-body">
-        <div *ngIf="checkdanhthu then display; else loading"></div>
+        <div *ngIf="checkdoanhthu then display; else loading"></div>
         <ng-template #display>
-            <table style="width: 100%;" border="1">
-                <tr>
-                    <td style="text-align: center;width: 20%;">id quán</td>
-                    <td style="text-align: center;width: 20%;">name quán</td>
-              
-                    <td style="text-align: center;width: 20%;">address quán</td>
-                    <td style="text-align: center;width: 20%;">phone quán</td>
-                    <td style="text-align: center;width: 20%;">Danh thu</td>
-
-                </tr>
-                <tr *ngFor="let danhthu of danhthus ;">
-                    <td>
-                        {{danhthu.idquan}}
-                    </td>
-                    <td>
-                        {{danhthu.namequan}}
-                    </td>
-                    <td>
-                        {{danhthu.addressquan}}
-                    </td>
-                    <td>
-                        {{danhthu.phonequan}}
-                    </td>
-                    <td>
-                        {{danhthu.danhthu}}
-                    </td>
-                </tr>
+            <table class="table table-striped" border="1">
+                <thead class="thead-dark">
+                    <tr>
+                        <td>id quán</td>
+                        <td>name quán</td>
+                        <td>address quán</td>
+                        <td >phone quán</td>
+                        <td>Doanh thu</td>
+                        <td>Doanh thu của admin</td> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let doanhthu of doanhthus ;">
+                        <td>
+                            {{doanhthu.idquan}}
+                        </td>
+                        <td>
+                            {{doanhthu.namequan}}
+                        </td>
+                        <td>
+                            {{doanhthu.addressquan}}
+                        </td>
+                        <td>
+                            {{doanhthu.phonequan}}
+                        </td>
+                        <td>
+                            {{doanhthu.doanhthuquan}}
+                        </td>
+                        <td>
+                            {{doanhthu.doanhthuadmin}}
+                        </td>
+                    </tr>
+                </tbody>
             </table>
-
+            <strong>Lãi xuất : </strong> {{laixuat}}<br>
+            <strong>Tổng doanh thu của quán : </strong>{{tongdoanhthuquan}}<br>
+            <strong>Tổng doanh thu của Admin : </strong>{{tongdoanhthuadmin}}
         </ng-template>
         <ng-template #loading>
             <div class="text-center">

@@ -31,7 +31,6 @@ export class AuthService {
 
     }
     checkTokenAdmin(): Observable<any>{
-        
         return this.http.get<any>('http://localhost:8000/api/v1/checkTokenAdmin', this.appCommonService.httpOptions).pipe(
             tap(data => {
                 of(data);
@@ -40,15 +39,12 @@ export class AuthService {
         )
     }
     login(user : any): Observable<any>{
-        console.log(this.appCommonService.httpOptions);
-        
         return this.http.post<any>('http://localhost:8000/api/v1/loginAdmin', user, this.appCommonService.httpOptions).pipe(
             tap(data=>{
-                console.log(data);
                 if(data.status){                    
                     this.storage.set('tokenAdmin', JSON.stringify(data.token));                    
                 }
-                return of(data);
+                of(data);
             }),
             catchError(this.appCommonService.errorHandler)
         )

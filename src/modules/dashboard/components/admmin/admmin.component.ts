@@ -40,17 +40,49 @@ export class AdmminComponent implements OnInit {
                 this.checkadmin=true;
                 this.admin=data.admin;
                 this.changeDetectorRef.detectChanges();   
-                this.getListquans();
+                this.getListquans(this.page);
             }
         })
     }
-    getListquans() {
+    page = 1;
+    tongpage = 0;
+    mangtrang: any;
+    taomangtrang(page: number) {
+        var mang: Array<boolean> = [];
+        for (let i = 0; i < this.tongpage; i++) {
+            mang.push(false);
+
+        }
+        mang[page - 1] = true;
+        this.mangtrang = mang;
+
+    }
+    Previous() {
+        if (this.page > 1) {
+            this.page--;
+            this.getListquans(this.page);
+        }
+    }
+    Next() {
+        if (this.page < this.tongpage) {
+            this.page++;
+            this.getListquans(this.page);
+        }
+    }
+    chontrang(page: number) {
+        this.page = page;
+        this.getListquans(this.page);
+    }
+
+    getListquans(page: number) {
         this.checklistquanschuapheduyet = false;
-        this.dashboardService.getListQuansChuaPheDuyetByTokenAdmin().subscribe(data => {
+        this.dashboardService.getListQuansChuaPheDuyetByTokenAdmin(page).subscribe(data => {
             console.log(data);
 
             if (data.status) {
                 this.listquanschuapheduyet = data.quans;
+                this.tongpage=data.tongpage;
+                this.taomangtrang(this.page);
                 this.checklistquanschuapheduyet = true;
                 this.changeDetectorRef.detectChanges();
 
@@ -74,7 +106,7 @@ export class AdmminComponent implements OnInit {
                 this.dashboardService.UpdateTrangThaiQuanTokenAdmin(quan.id,true).subscribe(data => {
                     console.log(data);
                     if (data.status) {
-                        this.getListquans();
+                        this.getListquans(this.page);
 
                     } else {
                         Swal.fire({
@@ -106,7 +138,7 @@ export class AdmminComponent implements OnInit {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                            this.getListquans();
+                            this.getListquans(this.page);
                         } else {
                             Swal.fire({
                                 icon: 'error',
