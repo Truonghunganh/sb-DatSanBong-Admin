@@ -14,8 +14,8 @@ export class DanhThuListQuanByAdminComponent implements OnInit {
     month = new Date().toISOString().slice(0, 7);
     checkdoanhthu = false;
     doanhthus: any;
-    tongdoanhthuquan=0;
-    tongdoanhthuadmin=0;
+    tongdoanhthuquan="";
+    tongdoanhthuadmin="";
     laixuat=""; 
 
     constructor(
@@ -52,12 +52,16 @@ export class DanhThuListQuanByAdminComponent implements OnInit {
 
             if (data.status) {
                 this.doanhthus = data.doanhthus;
-                this.tongdoanhthuquan=0;
-                this.tongdoanhthuadmin=0;
+                let tongdoanhthuquan=0;
+                let tongdoanhthuadmin=0;
                 for (let i = 0; i < this.doanhthus.length; i++) {
-                    this.tongdoanhthuquan+=this.doanhthus[i].doanhthuquan;
-                    this.tongdoanhthuadmin+=this.doanhthus[i].doanhthuadmin;
+                    tongdoanhthuquan+=this.doanhthus[i].doanhthuquan;
+                    this.doanhthus[i].doanhthuquan = this.doanhthus[i].doanhthuquan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    tongdoanhthuadmin+=this.doanhthus[i].doanhthuadmin;
+                    this.doanhthus[i].doanhthuadmin = this.doanhthus[i].doanhthuadmin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
+                this.tongdoanhthuquan = tongdoanhthuquan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                this.tongdoanhthuadmin = tongdoanhthuadmin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 this.laixuat=data.laixuat;
                 console.log(this.tongdoanhthuquan,this.tongdoanhthuadmin);
                 

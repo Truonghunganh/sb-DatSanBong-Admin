@@ -19,11 +19,6 @@ export class AuthService {
     ) {
 //        this.adminSubject = new BehaviorSubject<Admin1>(JSON.parse(this.storage.get('admin')));
     }
-    public httpOptions = {
-        headers: new HttpHeaders({
-            'Access-Control-Allow-Credentials': 'true',
-        }),
-    };
   //  private adminSubject: any;
     logout() {
         this.storage.set('tokenAdmin', JSON.stringify(1));
@@ -42,7 +37,7 @@ export class AuthService {
         return this.http.post<any>('http://localhost:8000/api/v1/loginAdmin', user, this.appCommonService.httpOptions).pipe(
             tap(data=>{
                 if(data.status){                    
-                    this.storage.set('tokenAdmin', JSON.stringify(data.token));                    
+                    this.setToken(data.token);                    
                 }
                 of(data);
             }),

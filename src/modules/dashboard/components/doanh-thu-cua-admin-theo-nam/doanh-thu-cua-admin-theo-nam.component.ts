@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from "../../services/dashboard.service";
 import { AuthService } from '../../../auth/services/auth.service'
 import Swal from 'sweetalert2';
-import { Chart, ChartDataSets } from 'chart.js';
+import { Chart, ChartOptions, ChartDataSets } from 'chart.js';
 import { Color } from 'ng2-charts';
 
 @Component({
@@ -14,20 +14,20 @@ import { Color } from 'ng2-charts';
 })
 export class DoanhThuCuaAdminTheoNamComponent implements OnInit {
     nam = Number(new Date().toISOString().slice(0, 4));
-    lineChartOptions = {
+    lineChartOptionsBD = {
         responsive: true,
     };
-    lineChartColors: Color[] = [
+    lineChartColorsBD: Color[] = [
         {
             backgroundColor: [
-                'rgba(255,0,0,0.3)', //đỏ
                 'rgba(0,255,0,0.3)',//xanh lá cây
+                'rgba(255,0,0,0.3)', //đỏ
                 'rgba(0,0,255,0.3)',//blue
                 'rgba(192,192,192,0.3)',//grey
                 'rgba(255,255,0,0.3)',//yellow
                 'rgba(255,0,255,0.3)',// Cerise
-                'rgba(255,0,0,0.3)', //đỏ
                 'rgba(0,255,0,0.3)',//xanh lá cây
+                'rgba(255,0,0,0.3)', //đỏ
                 'rgba(0,0,255,0.3)',//blue
                 'rgba(192,192,192,0.3)',//grey
                 'rgba(255,255,0,0.3)',//yellow
@@ -36,24 +36,41 @@ export class DoanhThuCuaAdminTheoNamComponent implements OnInit {
         },
 
     ];
+    pieChartOptionsBD: ChartOptions = {
+        responsive: true,
+        scales: {
+            xAxes: [{
+                ticks: {
+                    min: 0,
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                }
+            }]
+        }
+    };
     data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     doanhthustheonam = [];
-    lineChartTypeOB = 'bar';//'pie';//'line';
-    lineChartDataOB: ChartDataSets[] = [];
-    lineChartLabelsOB = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
+    lineChartTypeBD = 'bar';//'pie';//'line';
+    lineChartDataBD: ChartDataSets[] = [];
+    lineChartLabelsBD = [
+        'tháng 1',
+        'tháng 2',
+        'tháng 3',
+        'tháng 4',
+        'tháng 5',
+        'tháng 6',
+        'tháng 7',
+        'tháng 8',
+        'tháng 9',
+        'tháng 10',
+        'tháng 11',
+        'tháng 12',
+
     ];
+    pieChartPlugins = [];
     checkdoanhthustheonam = false;
     constructor(
         private dashboardService: DashboardService,
@@ -82,15 +99,15 @@ export class DoanhThuCuaAdminTheoNamComponent implements OnInit {
         }
         return tong;
     }
-    tongDanhthucuuanam = 0;
+    tongDanhthucuuanam = "";
     getDoanhThuCuaAdminTheoNam( nam: number) {
         this.checkdoanhthustheonam = false;
         this.dashboardService.getDoanhThuCuaAdminTheoNam(nam).subscribe(
             data => {
                 if (data.status) {
                     this.doanhthustheonam = data.doanhthustheonam;
-                    this.lineChartDataOB = [{ data: data.doanhthustheonam }];
-                    this.tongDanhthucuuanam = this.tinhtongDoanhthucuuanam(this.doanhthustheonam);
+                    this.lineChartDataBD = [{ data: data.doanhthustheonam, label: 'Doanh thu theo năm' }];
+                    this.tongDanhthucuuanam = this.tinhtongDoanhthucuuanam(this.doanhthustheonam).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     this.checkdoanhthustheonam = true;
                     this.changeDetectorRef.detectChanges();
                 }
@@ -103,15 +120,16 @@ export class DoanhThuCuaAdminTheoNamComponent implements OnInit {
     dangBD = "Biểu đồ cột";
     cot() {
         this.dangBD = "Biểu đồ cột";
-        this.lineChartTypeOB = "bar"
+        this.lineChartTypeBD = "bar"
     }
     tron() {
         this.dangBD = "Biểu đồ hình tròn";
-        this.lineChartTypeOB = "pie";
+        this.lineChartTypeBD = "pie";
     }
     duong() {
         this.dangBD = "Biểu đồ đường";
-        this.lineChartTypeOB = "line";
+        this.lineChartTypeBD = "line";
     }
+
 
 }

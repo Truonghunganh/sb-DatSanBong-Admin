@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
         )
     }
     submit(phone : string, password : string){
+        this.checklogin=false;
         const user=new User(phone,password);
         this.authService.login(user).subscribe(data=> {
             if (data.status) {
@@ -53,7 +54,7 @@ export class LoginComponent implements OnInit {
                     text: data.message,
                 })
             }
-           
+            this.checklogin=true;
             
         })
         

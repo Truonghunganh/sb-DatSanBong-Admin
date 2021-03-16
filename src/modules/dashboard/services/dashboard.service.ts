@@ -83,5 +83,14 @@ export class DashboardService {
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         );
     }
-
+    getTongDoanhCuaMotQuanThuTheoNamByAdmin(idquan: number, nam: number): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getTongDoanhCuaMotQuanThuTheoNamByAdmin", { "idquan": idquan, "nam": nam }, this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
+    getChiTietDanhthuCuaMotQuanByAdmin(id: number): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getChiTietDanhthuCuaMotQuanByAdmin", { "id": id }, this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
 }

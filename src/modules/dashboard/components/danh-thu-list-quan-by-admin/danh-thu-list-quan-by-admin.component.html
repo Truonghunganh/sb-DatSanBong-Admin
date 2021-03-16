@@ -1,6 +1,5 @@
 <h3>Chọn tháng doanh thu :
     <input type="month" [(ngModel)]="month" name="month" (change)="chonthang($event);">
-    <input type="button" class="btn btn-danger float-right" (click)="break()" value="Break" />
 </h3>
 <sb-card>
 
@@ -10,7 +9,7 @@
             <table class="table table-striped" border="1">
                 <thead class="thead-dark">
                     <tr>
-                        <td>id quán</td>
+                        <td>STT</td>
                         <td>name quán</td>
                         <td>address quán</td>
                         <td >phone quán</td>
@@ -19,9 +18,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let doanhthu of doanhthus ;">
+                    <tr *ngFor="let doanhthu of doanhthus ;index as i">
                         <td>
-                            {{doanhthu.idquan}}
+                            {{i+1}}
                         </td>
                         <td>
                             {{doanhthu.namequan}}

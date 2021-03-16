@@ -13,10 +13,10 @@
         <div *ngIf="checkdoanhthustheonam then display1; else loading1"></div>
         <ng-template #display1>
             <div class="chart-wrapper">
-                <canvas baseChart [datasets]="lineChartDataOB" [labels]="lineChartLabelsOB" [colors]="lineChartColors"
-                    [chartType]="lineChartTypeOB"></canvas>
+                <canvas baseChart [plugins]="pieChartPlugins" [options]="pieChartOptionsBD" [datasets]="lineChartDataBD"
+                    [labels]="lineChartLabelsBD" [colors]="lineChartColorsBD" [chartType]="lineChartTypeBD"></canvas>
             </div>
-            <strong>Tổng Doanh thu của năm {{nam}}: </strong>{{tongDanhthucuuanam }}
+             <strong>Tổng Doanh thu của năm {{nam}}: </strong>{{tongDanhthucuuanam }}
         </ng-template>
         <ng-template #loading1>
             <div class="text-center">

@@ -51,7 +51,7 @@
                 <table class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
-                            <td>id</td>
+                            <td>STT</td>
                             <td>Name</td>
                             <td>Address</td>
                             <td>Phone</td>
@@ -62,8 +62,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let quan of listquanschuapheduyet">
-                            <td>{{quan.id}}</td>
+                        <tr *ngFor="let quan of listquanschuapheduyet ;index as i">
+                            <td>{{(page-1)*10+i+1}}</td>
                             <td>{{quan.name}}</td>
                             <td><a href="{{quan.linkaddress}}">{{quan.address}}</a></td>
                             <td>{{quan.phone}}</td>
