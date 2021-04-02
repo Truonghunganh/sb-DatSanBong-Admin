@@ -1,14 +1,18 @@
 <sb-card>
+    <div class="card-header">
+        <h1 style="color:chartreuse;text-align: center;">Danh sách quán bóng đá đang hoạt động
+        </h1>
+    </div>
     <div class="card-body">
         <div *ngIf="checklistquansdapheduyet ; then display ; else loading"></div>
         <ng-template #display>
             <table class="table table-striped " style="width:100%">
                 <thead>
                     <tr>
-                        <td>id</td>
-                        <td>Name</td>
-                        <td>Address</td>
-                        <td>Phone</td>
+                        <td>STT</td>
+                        <td>Tên</td>
+                        <td>Địa Chỉ</td>
+                        <td>Số điện thoại</td>
                         <td>Ngày giờ đăng kí</td>
                         <td>Image</td>
                         <td>cho vào chưa phê duyệt</td>
@@ -16,8 +20,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let quan of listquansdapheduyet " routerLink="/dashboard/quans/{{quan.id}}">
-                        <td>{{quan.id}}</td>
+                    <tr *ngFor="let quan of listquansdapheduyet ;index as i" routerLink="/dashboard/quans/{{quan.id}}">
+                        <td>{{(page-1)*5+i+1}}</td>
                         <td>{{quan.name}}</td>
                         <td><a href="{{quan.linkaddress}}">{{quan.address}}</a></td>
                         <td>{{quan.phone}}</td>

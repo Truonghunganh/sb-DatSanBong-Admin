@@ -1,8 +1,10 @@
-<h1>
-    1 .thông tin cá nhân của Admin
-    <button class="btn btn-primary float-right" (click)="editAdmin()">Edit Admin</button>
-</h1>
 <sb-card>
+    <div class="card-header">
+        <h1 style="color:chartreuse">
+            1 .thông tin cá nhân của Admin
+            <button class="btn btn-primary float-right" (click)="editAdmin()">Edit Admin</button>
+        </h1>        
+    </div>
     <div class="card-body">
         <div *ngIf="checkadmin ; then display ; else loading"></div>
         <ng-template #display>
@@ -10,11 +12,11 @@
                 <table class="table table-striped " style="width:100%">
                     <tbody>
                         <tr>
-                            <td>full_name</td>
+                            <td>Họ và tên</td>
                             <td> <strong>{{ admin.name}}</strong></td>
                         </tr>
                         <tr>
-                            <td>Phone</td>
+                            <td>Số điện thoại</td>
                             <td><strong>{{ admin.phone}}</strong></td>
                         </tr>
                         <tr>
@@ -22,7 +24,7 @@
                             <td><strong>{{ admin.gmail }}</strong></td>
                         </tr>
                         <tr>
-                            <td>Address</td>
+                            <td>Địa Chỉ</td>
                             <td><strong>{{ admin.address}}</strong></td>
                         </tr>
                     </tbody>
@@ -41,8 +43,11 @@
     </div>
 </sb-card>
 
-<h1>2 .danh sách các quán chưa được phe duyệt</h1>
 <sb-card>
+    <div class="card-header">
+        <h1 style="color:blue">2 .danh sách các quán chưa được phe duyệt</h1>
+
+    </div>
     <div class="card-body">
         <div *ngIf="checklistquanschuapheduyet ; then display1 ; else loading1"></div>
         <ng-template #display1>
@@ -52,11 +57,11 @@
                     <thead>
                         <tr>
                             <td>STT</td>
-                            <td>Name</td>
-                            <td>Address</td>
-                            <td>Phone</td>
+                            <td>Tên </td>
+                            <td>Điạ chỉ</td>
+                            <td>Số điện thoại</td>
                             <td>Ngày giờ đăng kí</td>
-                            <td>Image</td>
+                            <td>Hình</td>
                             <td>cho quán hoạt động</td>
                             <!-- <td>Actions</td> -->
                         </tr>

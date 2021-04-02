@@ -88,9 +88,41 @@ export class DoanhThuCuaAdminTheoNamComponent implements OnInit {
 
             } else {
                 this.getDoanhThuCuaAdminTheoNam(this.nam);
-
+                this.getDoanhThuListQuanCuaMotNamByAdmin(this.nam);
             }
         })
+    }
+    checkdoanhthusListQuanCuaMotNam=false;
+    doanhthusListQuanCuaMotNam: any;
+    tongdoanhthuquan = "";
+    tongdoanhthuadmin = "";
+    laixuat = "";
+    getDoanhThuListQuanCuaMotNamByAdmin(nam: number){
+        this.checkdoanhthusListQuanCuaMotNam=false;
+        this.dashboardService.getDoanhThuListQuanCuaMotNamByAdmin(nam).subscribe(data =>{
+            if(data.status){
+                this.doanhthusListQuanCuaMotNam=data.doanhthus;
+                let tongdoanhthuquan = 0;
+                let tongdoanhthuadmin = 0;
+                for (let i = 0; i < this.doanhthusListQuanCuaMotNam.length; i++) {
+                    tongdoanhthuquan += this.doanhthusListQuanCuaMotNam[i].doanhthuquan;
+                    this.doanhthusListQuanCuaMotNam[i].doanhthuquan = this.doanhthusListQuanCuaMotNam[i].doanhthuquan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    tongdoanhthuadmin += this.doanhthusListQuanCuaMotNam[i].doanhthuadmin;
+                    this.doanhthusListQuanCuaMotNam[i].doanhthuadmin = this.doanhthusListQuanCuaMotNam[i].doanhthuadmin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+                this.tongdoanhthuquan = tongdoanhthuquan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                this.tongdoanhthuadmin = tongdoanhthuadmin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                this.laixuat = data.laixuat;
+                this.checkdoanhthusListQuanCuaMotNam= true;
+                this.changeDetectorRef.detectChanges();
+            }
+        })
+    }
+    chonNam(){
+        this.getDoanhThuCuaAdminTheoNam(this.nam);
+        this.getDoanhThuListQuanCuaMotNamByAdmin(this.nam);
+
+        
     }
     tinhtongDoanhthucuuanam(mang: any) {
         let tong = 0;

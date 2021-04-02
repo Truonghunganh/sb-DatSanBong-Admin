@@ -53,7 +53,35 @@ export class ListSansByIdQuanComponent implements OnInit {
 
     }
 
+    hienthibinhluan = "Xem binh luận";
+    checkhienthibinhluan = false;
+    checkcomments = false;
+    comments: any;
+    xembinhluan() {
+        this.checkhienthibinhluan = !this.checkhienthibinhluan;
+        if (this.checkhienthibinhluan) {
+            this.hienthibinhluan = "Ẩn bình luận";
+            this.checkcomments = false;
+            this.dashboardService.getAllCommentCuaMotQuanByAdmin(this.idquan).subscribe(data => {
+                console.log(data);
 
+                if (data.status) {
+                    this.comments = data.comments;
+                    this.checkcomments = true;
+                    this.changeDetectorRef.detectChanges();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: data.message,
+                    })
+                }
+            })
+        } else {
+            this.hienthibinhluan = "Xem binh luận";
+
+        }
+    }
+    sansTT: any;
     
     getDatSansvaSansByAdminAndIdquanAndNgay(idquan: number, ngay: any) {
         this.checkdatsans = false;
@@ -64,6 +92,7 @@ export class ListSansByIdQuanComponent implements OnInit {
                 if (!this.chekquanvasan) {
                     this.quan = data.quan;
                     this.sans = data.sans;
+                    this.sansTT= data.sansTT;
                     this.chekquanvasan = true;
                 }
                 this.mangDatsan = data.datsans;

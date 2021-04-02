@@ -1,55 +1,57 @@
-<div class="container py-2">
-    <div class="row my-2">
+<sb-card>
+    <div class="card-header">
+        <h1 style="color:blue; text-align: center;">Chỉnh sữa thông tin cá nhân của Admin</h1>
+    </div>
+    <div class="card-body">
         <div *ngIf="checkadmin; then display ; else loading"></div>
         <ng-template #display>
             <div class="col-lg-12 order-lg-1 personal-info">
                 <form>
                     <div class="form-group row">
-                        <label class="col-lg-2 col-form-label form-control-label">Name</label>
+                        <label class="col-lg-2 col-form-label form-control-label">Họ và tên</label>
                         <div class="col-lg-9">
-                            <input class="form-control" #name name="admin.name" [(ngModel)]="admin.name"
-                                required placeholder="Name" />
+                            <input class="form-control" #name name="admin.name" [(ngModel)]="admin.name" required
+                                placeholder="Name" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-lg-2 col-form-label form-control-label">Phone</label>
+                        <label class="col-lg-2 col-form-label form-control-label">Số điện thoại</label>
                         <div class="col-lg-9">
-                            <input class="form-control" #phone name="admin.phone" [(ngModel)]="admin.phone"
-                                required placeholder="Phone" disabled />
+                            <input class="form-control" #phone name="admin.phone" [(ngModel)]="admin.phone" required
+                                placeholder="Phone" disabled />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label form-control-label">Gmail</label>
                         <div class="col-lg-9">
-                            <input class="form-control" #gmail name="admin.gmail" [(ngModel)]="admin.gmail"
-                                required placeholder="Gmail" />
+                            <input class="form-control" #gmail name="admin.gmail" [(ngModel)]="admin.gmail" required
+                                placeholder="Gmail" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-lg-2 col-form-label form-control-label">Address</label>
+                        <label class="col-lg-2 col-form-label form-control-label">Địa chỉ</label>
                         <div class="col-lg-9">
-                            <input class="form-control" #address name="admin.address"
-                                [(ngModel)]="admin.address" required placeholder="Address" />
+                            <input class="form-control" #address name="admin.address" [(ngModel)]="admin.address" required
+                                placeholder="Address" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-lg-2 col-form-label form-control-label">Password</label>
+                        <label class="col-lg-2 col-form-label form-control-label">Mật khẩu</label>
                         <div class="col-lg-9">
-                            <input class="form-control" #password name="admin.phone" [(ngModel)]="admin.phone"
-                                required placeholder="Password" />
+                            <input class="form-control" #password name="admin.phone" [(ngModel)]="admin.phone" required
+                                placeholder="Password" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-9 ml-auto text-right">
-                            <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Cancel" />
+                            <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Hủy" />
                             <input type="button" class="btn btn-primary"
-                                (click)="Edit(name.value,gmail.value,address.value,password.value)"
-                                value="Save Changes" />
+                                (click)="Edit(name.value,gmail.value,address.value,password.value)" value="Lưu thông tin" />
                         </div>
                     </div>
                 </form>
             </div>
-
+        
         </ng-template>
         <ng-template #loading>
             <div class="text-center">
@@ -59,4 +61,4 @@
             </div>
         </ng-template>
     </div>
-</div>
+</sb-card>

@@ -218,13 +218,20 @@ export class DanhThuOfQuanComponent implements OnInit {
         this.dangBD = "Biểu đồ đường";
         this.lineChartTypeBD = "line";
     }
-
+    tongdoanhthuchitiet="";
     getChiTietDanhthuCuaMotQuanByAdmin(id: number) {
         this.checkdatsans = false;
         this.dashboardService.getChiTietDanhthuCuaMotQuanByAdmin(id).subscribe(data => {
+            
             if (data.status) {
                 this.datsans = data.mangChitietDoanhthus;
                 this.taodatsansnew(this.page);
+                let tong = 0;
+                for (let i = 0; i < this.datsans.length; i++) {
+                    tong+=this.datsans[i].price;
+                    this.datsans[i].price = this.datsans[i].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+                this.tongdoanhthuchitiet = tong.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 this.checkdatsans = true;
                 this.changeDetectorRef.detectChanges();
             }

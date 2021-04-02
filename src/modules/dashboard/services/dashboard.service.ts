@@ -93,4 +93,13 @@ export class DashboardService {
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         )
     }
+    getDoanhThuListQuanCuaMotNamByAdmin(nam: number): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getDoanhThuListQuanCuaMotNamByAdmin", { "nam": nam }, this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
+    getAllCommentCuaMotQuanByAdmin(idquan: number): Observable<any> {
+        return this.http.get<any>(environment.url + "/api/v1/getAllCommentCuaMotQuanByAdmin?idquan=" + idquan, this.appCommonService.httpOptions).
+            pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
+    }
 }
